@@ -92,6 +92,10 @@ module.exports = {
   },
 
   delete: async (req, res) => {
+    const { id } = req.params;
 
+    const newCourseDel = dbCourses.filter(course => `${course.id}` != `${id}`);
+    dbCourses = newCourseDel;
+    return res.json(newCourseDel);
   }
 }
