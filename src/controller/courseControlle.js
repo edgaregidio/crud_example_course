@@ -60,7 +60,7 @@ module.exports = {
       duration
     }
     dbCourses.push(newCourse)
-    
+
     return res.json(newCourse)
   },
 
@@ -72,6 +72,22 @@ module.exports = {
   },
 
   update: async (req, res) => {
+    const { id } = req.params;
+    const { name, nameTeacher, nbrStudent, duration } = req.body;
+
+    const indexUpdate = dbCourses.findIndex(course => `${course.id}` === `${id}`);
+    console.log(indexUpdate);
+
+    const courseUpdated = dbCourses[indexUpdate];
+
+    if(name) courseUpdated.name = name;
+    if(nameTeacher) courseUpdated.nameTeacher = nameTeacher;
+    if(nbrStudent) courseUpdated.nbrStudent = nbrStudent;
+    if(duration) courseUpdated.duration = duration;
+
+    dbCourses[indexUpdate] = courseUpdated;
+
+    return res.json(courseUpdated);
 
   },
 
