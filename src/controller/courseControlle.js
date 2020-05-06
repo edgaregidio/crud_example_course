@@ -59,15 +59,16 @@ module.exports = {
       nbrStudent,
       duration
     }
-
     dbCourses.push(newCourse)
-
-    return res.json(newCourse)
     
+    return res.json(newCourse)
   },
 
   read: async (req, res) => {
+    const { id } = req.params;
+    const courseSearch = dbCourses.filter(course => `${course.id}` === `${id}`);
 
+    return res.json(courseSearch[0] || {});
   },
 
   update: async (req, res) => {
